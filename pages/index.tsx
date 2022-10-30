@@ -1,15 +1,17 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { BASE_URL } from 'constants/common';
+import { BASE_URL, MAX_POKEMON_COUNT } from 'constants/common';
 import { Layout } from 'components/Layout';
 import Link from 'next/link';
 import Menu from 'components/Menu';
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { getPocketmonList } from 'apis/getPokemonList';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 
-const Home: NextPage = (results) => {
-  console.log(results);
+const Home: NextPage = () => {
   return (
     <Layout>
       <Menu
@@ -25,14 +27,40 @@ const Home: NextPage = (results) => {
     </Layout>
   );
 };
+interface ListItem {
+  name: string;
+  url: string;
+}
+interface Params {
+  limit: number;
+  offset: number;
+}
 
-export const getServerSideProps = async () => {
-  const data = await (await axios.get(`${BASE_URL}/pokemon-species/1`)).data;
-  return {
-    props: {
-      results: data,
-    },
-  };
-};
+interface Response {
+  count: number;
+  next: string;
+  previous: string;
+  results: ListItem[];
+}
+
+// export const getStaticProps = async () => {
+//   const axiosConfig: AxiosRequestConfig = {
+//     baseURL: BASE_URL,
+//     params: { limit: MAX_POKEMON_COUNT, offset: 0 },
+//   };
+//   const client = axios.create(axiosConfig);
+//   try {
+//     const res = await client.get(`/pokemon`);
+//     // const res = await axios.get<Response>(`${BASE_URL}/pokemon`, {limit: MAX_POKEMON_COUNT, offset:0});
+//     const data = res.data;
+//     return {
+//       props: {
+//         results: data,
+//       },
+//     };
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export default Home;
