@@ -11,13 +11,20 @@ type Props = {
 
 const Pokedex: NextPage<Props> = ({ results }) => {
   console.log(results);
+
   return (
     <div>
       <h1>pokedex</h1>
       <ul>
-        {results?.map((pokemon: ListItem) => (
-          <li key={pokemon.name}>{pokemon.name}</li>
-        ))}
+        {results?.map((pokemon: ListItem, i: number) => {
+          return (
+            <li key={pokemon.name}>
+              <Link href={`/pokedex/pokemons/${pokemon.name}/${i + 1}`}>
+                <a>{pokemon.name}</a>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
