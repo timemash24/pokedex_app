@@ -19,7 +19,7 @@ const Pokedex: NextPage<Props> = ({ results }) => {
         {results?.map((pokemon: ListItem, i: number) => {
           return (
             <li key={pokemon.name}>
-              <Link href={`/pokedex/pokemons/${pokemon.name}/${i + 1}`}>
+              <Link href={`/pokedex/pokemons/${pokemon.name}`}>
                 <a>{pokemon.name}</a>
               </Link>
             </li>
