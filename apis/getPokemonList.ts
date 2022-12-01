@@ -18,7 +18,7 @@ interface Response {
   results: ListItem[];
 }
 
-export const getPocketmonList = () =>
+export const getPokemonList = () =>
   Api.get<Params, Response>(BASE_URL, {
     limit: MAX_POKEMON_COUNT,
     offset: 0,

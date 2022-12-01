@@ -8,7 +8,15 @@ interface MyAppProps {
   pageProps: any;
 }
 function MyApp({ Component, pageProps }: MyAppProps) {
-  return <Component {...pageProps} />;
+  const [queryClient] = React.useState(() => new QueryClient());
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+      </Hydrate>
+    </QueryClientProvider>
+  );
 }
 
 export default MyApp;

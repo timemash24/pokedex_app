@@ -99,7 +99,7 @@ type Params = {
   params: { name: string };
 };
 
-export const getStaticProps = async ({ params }: Params) => {
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const axiosConfig: AxiosRequestConfig = {
     baseURL: BASE_URL,
   };
