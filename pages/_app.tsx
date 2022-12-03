@@ -8,7 +8,20 @@ interface MyAppProps {
   pageProps: any;
 }
 function MyApp({ Component, pageProps }: MyAppProps) {
-  const [queryClient] = React.useState(() => new QueryClient());
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 50000,
+            cacheTime: Infinity,
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+            onError: (error) => console.log((error as any).message),
+          },
+        },
+      })
+  );
 
   return (
     <QueryClientProvider client={queryClient}>

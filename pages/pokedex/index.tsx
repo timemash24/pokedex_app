@@ -10,16 +10,14 @@ type Props = {
   results: ListItem[];
 };
 
-const Pokedex: NextPage<Props> = ({ results }) => {
-  console.log(results);
+const Pokedex: NextPage<Props> = () => {
   const { data } = useQuery(['pokemonList'], getPokemonList);
-  console.log(data);
 
   return (
     <div>
       <h1>pokedex</h1>
       <ul>
-        {results?.map((pokemon: ListItem, i: number) => {
+        {data?.results.map((pokemon: ListItem, i: number) => {
           return (
             <li key={pokemon.name}>
               <Link href={`/pokedex/pokemons/${pokemon.name}`}>

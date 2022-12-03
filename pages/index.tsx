@@ -7,7 +7,6 @@ import { Layout } from 'components/Layout';
 import Link from 'next/link';
 import Menu from 'components/Menu';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getPocketmonList } from 'apis/getPokemonList';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
@@ -27,40 +26,5 @@ const Home: NextPage = () => {
     </Layout>
   );
 };
-interface ListItem {
-  name: string;
-  url: string;
-}
-interface Params {
-  limit: number;
-  offset: number;
-}
-
-interface Response {
-  count: number;
-  next: string;
-  previous: string;
-  results: ListItem[];
-}
-
-// export const getStaticProps = async () => {
-//   const axiosConfig: AxiosRequestConfig = {
-//     baseURL: BASE_URL,
-//     params: { limit: MAX_POKEMON_COUNT, offset: 0 },
-//   };
-//   const client = axios.create(axiosConfig);
-//   try {
-//     const res = await client.get(`/pokemon`);
-//     // const res = await axios.get<Response>(`${BASE_URL}/pokemon`, {limit: MAX_POKEMON_COUNT, offset:0});
-//     const data = res.data;
-//     return {
-//       props: {
-//         results: data,
-//       },
-//     };
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export default Home;

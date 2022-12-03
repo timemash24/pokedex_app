@@ -19,7 +19,7 @@ interface Response {
 }
 
 export const getPokemonList = () =>
-  Api.get<Params, Response>(BASE_URL, {
+  Api.get<Params, Response>(`${BASE_URL}/pokemon`, {
     limit: MAX_POKEMON_COUNT,
     offset: 0,
   });
